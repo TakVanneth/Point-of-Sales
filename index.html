@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point of Sales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>Monster Energy Drink</h1>
+    <section class="product">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-md-4 col-sm-4">
+                  <div class="card">
+                      <img src="images/monster1.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Monster 1</h5>
+                        <p class="card-text">Price: 10$</p>
+                        <button type="button" class="btn btn-primary order-button" data-product="Monster 1" data-price="10">Order</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="card">
+                      <img src="images/monster2.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Monster 2</h5>
+                        <p class="card-text">Price: 15$</p>
+                        <button type="button" class="btn btn-primary order-button" data-product="Monster 2" data-price="15">Order</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="card">
+                      <img src="images/monster3.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Monster 3</h5>
+                        <p class="card-text">Price: 10$</p>
+                        <button type="button" class="btn btn-primary order-button" data-product="Monster 3" data-price="10">Order</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="card">
+                      <img src="images/monster4.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Monster 4</h5>
+                        <p class="card-text">Price: 15$</p>
+                        <button type="button" class="btn btn-primary order-button" data-product="Monster 4" data-price="15">Order</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="card">
+                      <img src="images/monster4.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Monster 5</h5>
+                        <p class="card-text">Price: 10$</p>
+                        <button type="button" class="btn btn-primary order-button" data-product="Monster 5" data-price="10">Order</button>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="card">
+                      <img src="images/monster4.jpg" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Monster 6</h5>
+                        <p class="card-text">Price: 10$</p>
+                        <button type="button" class="btn btn-primary order-button" data-product="Monster 6" data-price="15">Order</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div id="getItem">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selectedProducts">
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="5"><span id="items"></span>Total:</th>
+                            <td id="totalAmount">$0.00</td>
+                        </tr>
+                        <tr>
+                            <th colspan="5">Tax (10%):</th>
+                            <td id="taxAmount">$0.00</td>
+                        </tr>
+                        <tr>
+                            <th colspan="5">Grand Total:</th>
+                            <td id="grandTotal">$0.00</td>
+                        </tr>
+                        <tr>
+                          <th colspan="5">Select Currency:</th>
+                          <td>
+                            <div>
+                              <label for="dollars">Dollars</label>
+                              <input type="radio" id="dollars" name="currency" value="dollars" checked>
+                              <label for="riel">&nbsp;&nbsp;&nbsp;Riel</label>
+                              <input type="radio" id="riel" name="currency" value="riel"><span id="exchangeRate"></span>
+                          </div>                                                
+                          </td>
+                          </tr>
+                          <tr>
+                              <th colspan="5">Payment Received:</th>
+                              <td>
+                                  <input type="number" id="paymentReceived" placeholder="0.00">
+                              </td>
+                          </tr>                                                                
+                        <tr>
+                            <th colspan="5">Change Returned:</th>
+                            <td id="changeReturned">$0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
+                </div>
+            </div>     
+            </div>
+          </div>
+          </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
