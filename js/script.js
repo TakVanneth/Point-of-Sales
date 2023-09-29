@@ -1,3 +1,6 @@
+if (!localStorage.getItem('passPOS')) {
+    window.location.href = 'login.html';
+}
 $(document).ready(function () {
     let currentId = 1;
     const selectedProducts = []; // An array to store selected products
