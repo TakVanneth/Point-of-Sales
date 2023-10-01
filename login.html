@@ -65,6 +65,7 @@
         var usernameValue = user.value.trim();
         var passwordValue = pass.value.trim();
 
+
         if (usernameValue === "" || passwordValue === "") {
             if (usernameValue === "") {
                 user.focus();
@@ -85,6 +86,7 @@
         }
     }
 
+    
     document.getElementById('user').addEventListener('input', function () {
         this.style.borderColor = '';
     });

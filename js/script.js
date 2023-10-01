@@ -1,9 +1,5 @@
-if (!localStorage.getItem('passPOS')) {
-    window.location.href = 'login.html';
-}
 $(document).ready(function () {
-    let currentId = 1;
-    const selectedProducts = []; // An array to store selected products
+    const selectedProducts = [];
     const exchangeRate = 4150;
 
     // Set the exchange rate
@@ -23,7 +19,7 @@ $(document).ready(function () {
         const grandTotal = total + taxAmount;
 
         // Display the total, tax amount, and grand total in dollars
-        $("#totalAmount").text("$" + total.toFixed(2)); // toFixed(2)) used for formatting numeric values to display them with two decimal places. e.g. 1.23
+        $("#totalAmount").text("$" + total.toFixed(2));
         $("#taxAmount").text("$" + taxAmount.toFixed(2));
         $("#grandTotal").text("$" + grandTotal.toFixed(2));
 
@@ -93,36 +89,6 @@ $(document).ready(function () {
         }
     }
 
-    // Event listener for "Order" button click
-    $(".order-button").on("click", function () {
-        const productName = $(this).data("product");
-        const productPrice = parseFloat($(this).data("price"));
-
-        // Check if the product is already in the order by productName
-        const existingProduct = selectedProducts.find(product => product.name === productName);
-
-        if (existingProduct) {
-            alert("This product is already in your order.");
-        } else {
-            const productId = currentId++; // loop ID increment by order product
-            const productQuantity = 1;
-            const productTotal = productPrice * productQuantity;
-
-            // Add the selected product to the array
-            selectedProducts.push({
-                id: productId,
-                name: productName,
-                quantity: productQuantity,
-                price: productPrice,
-                total: productTotal,
-            });
-
-            // Update the displayed products and total
-            addProducts(selectedProducts);
-            updateTotal();
-        }
-    });
-
     // Function to add products to the table
     function addProducts(products) {
         // Clear the table body
@@ -147,7 +113,6 @@ $(document).ready(function () {
 
             // Count the number of rows in the table and display it
             const rowCount = $("#selectedProducts tr").length;
-            console.log(rowCount);
             $("#items").html(rowCount + " items ");
         });
 
@@ -185,7 +150,7 @@ $(document).ready(function () {
             });
 
             if (indexToRemove !== -1) {
-                // Remove the product from the selectedProducts array using splice (method to remove one element from the selectedProducts array at the index specified by indexToRemove.)
+                // Remove the product from the selectedProducts array using splice
                 selectedProducts.splice(indexToRemove, 1);
 
                 // Update the displayed products and total
@@ -201,4 +166,78 @@ $(document).ready(function () {
             location.reload();
         }
     });
+
+    // Function to create and populate an HTML card
+    function createCard(productData) {
+        const card = document.createElement('div');
+        card.classList.add('col-md-4', 'col-sm-4', 'product-card');
+        card.innerHTML = `
+            <div class="card">
+                <img src="${productData.imageurl}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">${productData.name}</h5>
+                    <p class="card-text">Price: ${productData.price}$</p>
+                    <button type="button" class="btn btn-primary order-button" data-product="${productData.name}" data-price="${productData.price}" data-id="${productData.id}">Order</button>
+                </div>
+            </div>
+        `;
+
+            // Add an event listener to the "Order" button
+        const orderButton = card.querySelector('.order-button');
+        orderButton.addEventListener('click', function () {
+        const productName = this.getAttribute('data-product');
+        const productPrice = parseFloat(this.getAttribute('data-price'));
+        const productId = parseInt(this.getAttribute('data-id'));
+        
+        // Check if the product is already in the order by productId
+        const existingProduct = selectedProducts.find(product => product.id === productId);
+
+        if (existingProduct) {
+            alert("This product is already in your order.");
+        } else {
+            const productQuantity = 1;
+            const productTotal = productPrice * productQuantity;
+
+            selectedProducts.push({
+                id: productId,
+                name: productName,
+                quantity: productQuantity,
+                price: productPrice,
+                total: productTotal,
+            });
+
+            addProducts(selectedProducts);
+            updateTotal();
+        }
+    });
+
+    return card;
+    }
+
+    // Function to populate the product section with data
+    function populateProductSection(data) {
+        const productContainer = document.getElementById('productContainer');
+
+        data.forEach((productData) => {
+            const card = createCard(productData);
+            productContainer.appendChild(card);
+        });
+    }
+
+    // Fetch data from the API and populate the product section
+    function fetchDataFromAPI() {
+        return fetch('http://127.0.0.1:8000/products')
+            .then((response) => response.json())
+            .catch((error) => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+    fetchDataFromAPI()
+        .then((data) => {
+            populateProductSection(data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 });

@@ -1,0 +1,29 @@
+ // Event listener for "Order" button click
+    // $(".order-button").on("click", function () {
+    //     const productName = $(this).data("product");
+    //     const productPrice = parseFloat($(this).data("price"));
+
+    //     // Check if the product is already in the order by productName
+    //     const existingProduct = selectedProducts.find(product => product.name === productName);
+
+    //     if (existingProduct) {
+    //         alert("This product is already in your order.");
+    //     } else {
+    //         const productId = currentId++; // loop ID increment by order product
+    //         const productQuantity = 1;
+    //         const productTotal = productPrice * productQuantity;
+
+    //         // Add the selected product to the array
+    //         selectedProducts.push({
+    //             id: productId,
+    //             name: productName,
+    //             quantity: productQuantity,
+    //             price: productPrice,
+    //             total: productTotal,
+    //         });
+
+    //         // Update the displayed products and total
+    //         addProducts(selectedProducts);
+    //         updateTotal();
+    //     }
+    // });
